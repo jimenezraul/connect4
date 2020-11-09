@@ -5,21 +5,32 @@
 
 """
 
-
+# First player start with X
 player = "  X  "
 
+# Numbers of columns
 columns = ["  1  ", "  2  ", "  3  ", "  4  ", "  5  ", "  6  ", "  7  "]
-board = [["     ", "     ", "     ", "     ", "     ", "     ", "     "], ["     ", "     ", "     ", "     ", "     ", "     ", "     "],
-         ["     ", "     ", "     ", "     ", "     ", "     ", "     "], ["     ", "     ", "     ", "     ", "     ", "     ", "     "],
-         ["     ", "     ", "     ", "     ", "     ", "     ", "     "], ["     ", "     ", "     ", "     ", "     ", "     ", "     "]]
+
+# Board empty slots
+board = [
+    ["     ", "     ", "     ", "     ", "     ", "     ", "     "],
+    ["     ", "     ", "     ", "     ", "     ", "     ", "     "],
+    ["     ", "     ", "     ", "     ", "     ", "     ", "     "],
+    ["     ", "     ", "     ", "     ", "     ", "     ", "     "],
+    ["     ", "     ", "     ", "     ", "     ", "     ", "     "],
+    ["     ", "     ", "     ", "     ", "     ", "     ", "     "]
+]
+
 count = 0
 
 
+# End the game
 def end():
     print("Good Bye!")
     exit()
 
 
+# If theres a winner, show who wins and ask to play again
 def winner(piece):
     print(f"{piece} Wins")
     play_again = input("Want to play again? Y or N: ")
@@ -30,7 +41,7 @@ def winner(piece):
                     board[s][p] = "     "
             global count
             count = 0
-            table(player)
+            start(player)
         else:
             end()
     else:
@@ -38,6 +49,7 @@ def winner(piece):
         winner(piece)
 
 
+# Check for a winner
 def check_for_winner(piece):
     # Check Horizontal
     for s in range(len(board)):
@@ -68,6 +80,7 @@ def check_for_winner(piece):
                 return True
 
 
+# Check is all the slot are full and no winner
 def draw():
     print("Is a draw!")
     play_again = input("Want to play again? Y or N: ")
@@ -78,7 +91,7 @@ def draw():
                     board[s][p] = "     "
             global count
             count = 0
-            table(player)
+            start(player)
         else:
             end()
     else:
@@ -86,7 +99,8 @@ def draw():
         draw()
 
 
-def table(piece, piece2=None):
+# Start game - print board to screen
+def start(piece, piece2=None):
     print("          ----------------------\n         |       Connect 4      |\n          ----------------------")
     print("\n", end="")
     for p in range(len(columns)):
@@ -103,9 +117,10 @@ def table(piece, piece2=None):
     if count > 42:
         draw()
     else:
-        start(piece)
+        user_input(piece)
 
 
+# Check is the slot is empty to mark the piece into slot, else slot - 1
 def play(i, x, piece):
     if board[i][x] == "     ":
         board[i][x] = piece
@@ -113,16 +128,17 @@ def play(i, x, piece):
 
         if piece != "  X  ":
             piece = "  X  "
-            table(piece, piece2)
+            start(piece, piece2)
         else:
             piece = "  O  "
-            table(piece, piece2)
+            start(piece, piece2)
     else:
         i -= 1
         play(i, x, piece)
 
 
-def start(piece):
+# User input selector
+def user_input(piece):
     try:
         input_num = int(input("Enter a column number: "))
         play(5, input_num - 1, piece)
@@ -130,9 +146,10 @@ def start(piece):
         print('Overflowed after ', err)
     except IndexError:
         print("Please enter a Number.")
-        start(piece)
+        user_input(piece)
     except ValueError:
         print("Please enter a Number.")
-        start(piece)
+        user_input(piece)
 
-table(player)
+
+start(player)
