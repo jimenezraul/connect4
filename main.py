@@ -5,6 +5,7 @@
 
 """
 
+
 player = "  X  "
 
 columns = ["  1  ", "  2  ", "  3  ", "  4  ", "  5  ", "  6  ", "  7  "]
@@ -86,7 +87,7 @@ def draw():
 
 
 def table(piece, piece2=None):
-    print("    ----------------------\n   |       Connect 4      |\n    ----------------------")
+    print("          ----------------------\n         |       Connect 4      |\n          ----------------------")
     print("\n", end="")
     for p in range(len(columns)):
         print("|" + columns[p], end="")
