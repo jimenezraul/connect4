@@ -73,7 +73,7 @@ def check_for_winner(piece):
                 return True
 
     # Check negatively sloped diaganols
-    for s in range(len(board)):
+    for s in range(3, len(board)):
         for p in range(len(board[s]) - 3):
             if board[s][p] == piece and board[s - 1][p + 1] == piece and board[s - 2][p + 2] == piece and board[s - 3][
                 p + 3] == piece:
